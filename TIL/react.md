@@ -2,11 +2,11 @@
 
 - **반드시 대문자로 시작해야한다**
 
+---
+
 # props
 
 - 컴포넌트의 속성
-
----
 
 ## 배열 넘기기
 
@@ -21,8 +21,6 @@ reurn(
     <Nav topics={topics} /> // 있는 그대로 가져옴
 );
 ```
-
----
 
 ## 배열의 원소들을 하나씩 꺼내오기
 
@@ -42,3 +40,64 @@ function Nav(props) {
   return <nav>{lis}</nav>; // {} 이게 중요 !
 }
 ```
+
+---
+
+# event
+
+## 기본 동작 방지
+
+```
+<a href="/" onClick={function(event){
+  event.preventDefault() // 기본 동작 방지
+}}>{props.title}</a>
+```
+
+## 이벤트 사용
+
+- 함수 정의, 호출
+
+```
+function Header(props) {
+  return (
+    <header>
+      <h1>
+        <a
+          href="/"
+          onClick={(event) => {
+            event.preventDefault(); // 기본동작 방지
+>            props.onChangeMode(); // 함수 호출
+          }}
+        >
+          {props.title}
+        </a>
+      </h1>
+    </header>
+  );
+}
+
+function App() {
+  const topics = [
+    { id: 1, title: "html", body: "html is ..." },
+    { id: 2, title: "css", body: "css is ..." },
+    { id: 3, title: "js", body: "js is ..." },
+  ];
+  return (
+    <div>
+      <Header
+        title="WEB"
+        onChangeMode={() => { // 함수 정의
+          alert("Header");
+        }}
+      />
+      <Nav topics={topics} />
+      <Article title="Welcome" body="Hello, WEB" />
+      <Article title="Hi" body="Hello, React" />
+    </div>
+  );
+}
+
+export default App;
+```
+
+- target = 이벤트를 유발시킨 태그

@@ -2,11 +2,19 @@
 import "./App.css";
 
 function Header(props) {
-  console.log("props", props, props.title);
+  // console.log("props", props, props.title);
   return (
     <header>
       <h1>
-        <a href="/">{props.title}</a>
+        <a
+          href="/"
+          onClick={(event) => {
+            event.preventDefault(); // 기본동작 방지
+            props.onChangeMode(); // 함수 호출
+          }}
+        >
+          {props.title}
+        </a>
       </h1>
     </header>
   );
@@ -18,7 +26,17 @@ function Nav(props) {
     let t = props.topics[i];
     lis.push(
       <li key={t.id}>
-        <a href={"/read/" + t.id}>{t.title}</a>
+        <a
+          id={t.id}
+          href={"/read/" + t.id}
+          onClick={(event) => {
+            event.preventDefault();
+            props.onChangeMode(event.target.id); // target = 이벤트를 유발시킨 태그
+            alert(event.id);
+          }}
+        >
+          {t.title}
+        </a>
       </li>
     );
   }
@@ -46,8 +64,18 @@ function App() {
   ];
   return (
     <div>
-      <Header title="WEB" />
-      <Nav topics={topics} />
+      <Header
+        title="WEB"
+        onChangeMode={() => {
+          alert("Header");
+        }}
+      />
+      <Nav
+        topics={topics}
+        onChangeMode={(id) => {
+          alert(id);
+        }}
+      />
       <Article title="Welcome" body="Hello, WEB" />
       <Article title="Hi" body="Hello, React" />
     </div>
