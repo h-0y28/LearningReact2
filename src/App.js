@@ -1,11 +1,12 @@
 import logo from "./logo.svg";
 import "./App.css";
 
-function Header() {
+function Header(props) {
+  console.log("props", props, props.title);
   return (
     <header>
       <h1>
-        <a href="/">WEB</a>
+        <a href="/">{props.title}</a>
       </h1>
     </header>
   );
@@ -27,11 +28,11 @@ function Nav() {
   );
 }
 
-function Article() {
+function Article(props) {
   return (
     <article>
-      <h2>Welcome</h2>
-      Hello, WEB
+      <h2>{props.title}</h2>
+      {props.body}
     </article>
   );
 }
@@ -39,9 +40,10 @@ function Article() {
 function App() {
   return (
     <div>
-      <Header />
+      <Header title="WEB" />
       <Nav />
-      <Article />
+      <Article title="Welcome" body="Hello, WEB" />
+      <Article title="Hi" body="Hello, React" />
     </div>
   );
 }
