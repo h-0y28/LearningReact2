@@ -101,3 +101,21 @@ export default App;
 ```
 
 - target = 이벤트를 유발시킨 태그
+
+---
+
+# state
+
+- prop : 컴포넌트를 사용하는 외부 자를 위한 데이터
+- state : 컴포넌트를 만드는 내부자를 위한 데이터
+
+### useState
+
+- 배열을 리턴함
+- useState의 인자는 그 state의 초깃값
+- 0번째 인덱스 값으로 읽음
+- state를 바꿀 때는 1번째 인덱스의 값, 함수로 바꿈
+
+```
+  const [mode, setMode] = useState('WELCOME');
+```
