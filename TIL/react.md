@@ -106,8 +106,9 @@ export default App;
 
 # state
 
-- prop : 컴포넌트를 사용하는 외부 자를 위한 데이터
-- state : 컴포넌트를 만드는 내부자를 위한 데이터
+- prop : 컴포넌트를 사용하는 **외부자**를 위한 데이터
+- state : 컴포넌트를 만드는 **내부자**를 위한 데이터
+  - 컴포넌트 안에서 바꿀 수 있음 !!
 
 ### useState
 
@@ -119,3 +120,9 @@ export default App;
 ```
   const [mode, setMode] = useState('WELCOME');
 ```
+
+---
+
+# update
+
+- read + create
