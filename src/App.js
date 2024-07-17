@@ -63,7 +63,7 @@ function Create(props) {
       <h2>Create</h2>
       <form
         onSubmit={(event) => {
-          event.defaultPrevented();
+          event.preventDefault();
           const title = event.target.title.value;
           const body = event.target.body.value;
           props.onCreate(title, body);
