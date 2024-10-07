@@ -128,7 +128,3 @@ function InputSample() {
 export default InputSample;
 
 ```
-
-이제 이 코드를 통해 여러 개의 입력 필드를 효율적으로 관리할 수 있습니다. 불변성을 유지하고 상태를 업데이트하는 방법을 잘 기억해 주세요! 추가 질문이 있으면 언제든지 물어보세요!
-
-4o mini
