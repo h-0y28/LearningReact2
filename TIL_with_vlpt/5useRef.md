@@ -2,6 +2,8 @@
 
 리액트에서 DOM 요소에 접근해야 할 때 `useRef`를 사용하여 특정 DOM 요소를 선택하고 조작할 수 있습니다. 이 방법은 JavaScript에서 `getElementById`나 `querySelector`와 같은 DOM 선택기를 사용하는 것과 유사합니다.
 
+---
+
 ### 1. `useRef`란?
 
 - `useRef`는 리액트의 Hook 중 하나로, 컴포넌트가 렌더링될 때 참조를 생성하고, 이 참조를 사용하여 DOM 요소에 접근할 수 있게 해줍니다.
@@ -13,19 +15,19 @@
 2. **DOM 요소에 ref 설정**: 생성한 ref 객체를 원하는 DOM 요소의 `ref` 속성에 할당합니다.
 3. **DOM 접근**: `ref.current`를 통해 해당 DOM 요소에 접근할 수 있습니다.
 
+---
+
 ### 3. 예제: InputSample 컴포넌트
 
 아래는 `InputSample` 컴포넌트에 `useRef`를 적용한 코드입니다:
 
 ```jsx
-javascript
-코드 복사
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 
 function InputSample() {
   const [inputs, setInputs] = useState({
-    name: '',
-    nickname: ''
+    name: "",
+    nickname: "",
   });
   const nameInput = useRef(); // useRef로 Ref 객체 생성
 
@@ -35,14 +37,14 @@ function InputSample() {
     const { value, name } = e.target; // name과 value 추출
     setInputs({
       ...inputs, // 기존 객체 복사
-      [name]: value // 변경된 값 설정
+      [name]: value, // 변경된 값 설정
     });
   };
 
   const onReset = () => {
     setInputs({
-      name: '',
-      nickname: ''
+      name: "",
+      nickname: "",
     });
     nameInput.current.focus(); // 초기화 후 이름 input에 포커스
   };
@@ -72,8 +74,9 @@ function InputSample() {
 }
 
 export default InputSample;
-
 ```
+
+---
 
 ### 4. `onReset` 함수의 동작
 
@@ -84,12 +87,17 @@ export default InputSample;
 ### 5. 추가 정보
 
 - **DOM 조작은 가급적 피하라**: 리액트는 가상 DOM을 사용하여 효율적인 렌더링을 수행하므로, 직접 DOM을 조작하는 것을 피하는 것이 좋습니다. 하지만 필요할 경우 `useRef`를 통해 접근할 수 있습니다.
+
 - **불변성의 중요성**: 상태를 직접 변경하는 것이 아니라 항상 새로운 객체를 만들어서 업데이트해야 합니다. 이는 리액트가 변경 사항을 감지하고 효율적으로 리렌더링하는 데 도움이 됩니다.
+
 - **리액트와 외부 라이브러리**: D3.js, Chart.js, Video.js와 같은 외부 라이브러리를 사용할 때 DOM 요소에 직접 접근해야 하는 경우가 많습니다. 이때 `useRef`가 유용합니다.
+
 - **렌더링 최적화**: 리액트는 상태와 props의 변경에 따라 자동으로 리렌더링됩니다. DOM을 직접 조작하면 이러한 최적화가 깨질 수 있으니 주의가 필요합니다.
 
 ---
 
 ### 결론
 
-`useRef`는 리액트에서 특정 DOM 요소에 직접 접근해야 할 때 매우 유용합니다. 입력 필드에 포커스를 설정하거나, 특정 DOM 요소의 크기를 가져오는 등의 작업을 할 수 있습니다. 다만, 리액트의 장점인 선언형 프로그래밍을 유지하기 위해 가능한 한 DOM 조작을 최소화하는 것이 좋습니다.
+`useRef`는 리액트에서 특정 DOM 요소에 직접 접근해야 할 때 매우 유용합니다.
+입력 필드에 포커스를 설정하거나, 특정 DOM 요소의 크기를 가져오는 등의 작업을 할 수 있습니다.
+다만, 리액트의 장점인 선언형 프로그래밍을 유지하기 위해 가능한 한 DOM 조작을 최소화하는 것이 좋습니다.
