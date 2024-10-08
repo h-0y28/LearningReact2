@@ -1,25 +1,28 @@
-# `useRef`로 특정 DOM 선택하기
+### `useRef`로 특정 DOM 선택하기
 
-리액트에서 DOM 요소에 접근해야 할 때 `useRef`를 사용하여 특정 DOM 요소를 선택하고 조작할 수 있습니다. 이 방법은 JavaScript에서 `getElementById`나 `querySelector`와 같은 DOM 선택기를 사용하는 것과 유사합니다.
+리액트에서 **DOM 요소에 접근**해야 할 때 `useRef` ⇒ 특정 DOM 요소를 선택하고 조작
+→ JS에서 `getElementById`나 `querySelector`와 같은 DOM 선택기를 사용하는 것과 유사
 
 ---
 
 ### 1. `useRef`란?
 
-- `useRef`는 리액트의 Hook 중 하나로, 컴포넌트가 렌더링될 때 참조를 생성하고, 이 참조를 사용하여 DOM 요소에 접근할 수 있게 해줍니다.
-- `useRef`는 **불변성**을 유지하므로, 값이 변경되어도 컴포넌트를 리렌더링하지 않습니다.
+- 리액트의 Hook, 컴포넌트가 렌더링될 때 참조 생성 및 이 참조를 사용하여 DOM 요소 접근을 도움
+- **불변성**을 유지하므로, 값이 변경되어도 컴포넌트를 리렌더링 X
+
+---
 
 ### 2. `useRef` 사용 방법
 
-1. **Ref 객체 생성**: `useRef`를 호출하여 ref 객체를 생성합니다.
-2. **DOM 요소에 ref 설정**: 생성한 ref 객체를 원하는 DOM 요소의 `ref` 속성에 할당합니다.
-3. **DOM 접근**: `ref.current`를 통해 해당 DOM 요소에 접근할 수 있습니다.
+1. **Ref 객체 생성**: `useRef`를 호출하여 ref 객체를 생성
+2. **DOM 요소에 ref 설정**: 생성한 ref 객체를 원하는 DOM 요소의 `ref` 속성에 할당
+3. **DOM 접근**: `ref.current` ⇒ 해당 DOM 요소에 접근 가능
 
 ---
 
 ### 3. 예제: InputSample 컴포넌트
 
-아래는 `InputSample` 컴포넌트에 `useRef`를 적용한 코드입니다:
+아래는 `InputSample` 컴포넌트에 `useRef`를 적용한 코드:
 
 ```jsx
 import React, { useState, useRef } from "react";
@@ -80,7 +83,8 @@ export default InputSample;
 
 ### 4. `onReset` 함수의 동작
 
-- `onReset` 함수에서는 상태를 초기화하고, `nameInput.current.focus()`를 호출하여 이름 입력 필드에 포커스를 설정합니다. 이는 버튼 클릭 후 즉시 입력 필드에 포커스를 맞춰주므로 사용자 경험이 향상됩니다.
+- `onReset` 함수에서는 상태를 초기화하고, `nameInput.current.focus()`를 호출하여 이름 입력 필드에 포커스를 설정
+  이는 버튼 클릭 후 즉시 입력 필드에 포커스를 맞춰주므로 사용자 경험이 향상
 
 ---
 
