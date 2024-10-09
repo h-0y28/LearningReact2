@@ -96,10 +96,7 @@ export default App;
   - 기존 배열을 복사한 후 새 항목을 추가하는 방식.
 
   ```jsx
-  javascript
-  코드 복사
   setUsers([...users, user]);
-
   ```
 
 - **concat 함수**:
@@ -107,10 +104,7 @@ export default App;
   - 배열을 수정하지 않고 새 배열을 반환하는 방식.
 
   ```jsx
-  javascript
-  코드 복사
   setUsers(users.concat(user));
-
   ```
 
 <link>https://codesandbox.io/p/sandbox/begin-react-mn82z
