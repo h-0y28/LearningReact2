@@ -113,6 +113,9 @@ export default App;
 
   ```
 
+<link>https://codesandbox.io/p/sandbox/begin-react-mn82z
+</link>
+
 ---
 
 ### 핵심 사항:
