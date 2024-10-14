@@ -1,6 +1,6 @@
 # `useCallback` ?
 
-- **목적**: 컴포넌트가 리렌더링될 때마다 새로운 함수를 생성하는 것을 방지하여 성능 최적화를 돕습니다. 동일한 함수 인스턴스를 재사용할 수 있습니다.
+- **목적**: 컴포넌트가 리렌더링될 때마다 새로운 함수를 생성하는 것을 방지하여 성능 최적화를 돕습니다. 동일한 함수 인스턴스를 재사용 가능
 
 ---
 
@@ -74,6 +74,8 @@ export default App;
 
 ### `useMemo`와의 차이점
 
+![alt text](12imgs/image.png)
+
 #### 1. 목적
 
 - **`useMemo`**: 계산된 값을 메모이제이션하여 성능 최적화. 주로 계산 비용이 큰 값을 재사용할 때 사용.
@@ -104,7 +106,9 @@ export default App;
 
 #### 4. 의존성 배열
 
-- 두 Hook 모두 의존성 배열을 사용하지만, `useMemo`는 값이 변경될 때마다 재계산하고, `useCallback`은 참조하는 값이 변경될 때 새로운 함수를 생성합니다.
+- 두 Hook 모두 의존성 배열을 사용
+- `useMemo` : 값이 변경될 때마다 재계산
+- `useCallback` : 참조하는 값이 변경될 때 새로운 함수를 생성
 
 #### 5. 예제 코드
 
@@ -170,4 +174,107 @@ export default App;
 2. **의존성 배열**: 상태와 props는 반드시 포함해야 최신 값을 참조할 수 있습니다.
 3. **최적화 필요성**: `useCallback` 자체는 즉각적인 최적화를 제공하지 않지만, 후에 컴포넌트 렌더링 최적화 작업을 통해 성능 향상 가능.
 
-이렇게 정리하면 `useCallback`과 `useMemo`에
+---
+
+### 활용
+
+`app.js`
+
+```js
+import React, { useRef, useState, useMemo, useCallback } from "react";
+import UserList from "./UserList";
+import CreateUser from "./CreateUser";
+
+function countActiveUsers(users) {
+  console.log("활성 사용자 수를 세는중...");
+  return users.filter((user) => user.active).length;
+}
+
+function App() {
+  const [inputs, setInputs] = useState({
+    username: "",
+    email: "",
+  });
+  const { username, email } = inputs;
+  const onChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setInputs({
+        ...inputs,
+        [name]: value,
+      });
+    },
+    [inputs]
+  );
+  const [users, setUsers] = useState([
+    {
+      id: 1,
+      username: "velopert",
+      email: "public.velopert@gmail.com",
+      active: true,
+    },
+    {
+      id: 2,
+      username: "tester",
+      email: "tester@example.com",
+      active: false,
+    },
+    {
+      id: 3,
+      username: "liz",
+      email: "liz@example.com",
+      active: false,
+    },
+  ]);
+
+  const nextId = useRef(4);
+  const onCreate = useCallback(() => {
+    const user = {
+      id: nextId.current,
+      username,
+      email,
+    };
+    setUsers(users.concat(user));
+
+    setInputs({
+      username: "",
+      email: "",
+    });
+    nextId.current += 1;
+  }, [users, username, email]);
+
+  const onRemove = useCallback(
+    (id) => {
+      // user.id 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
+      // = user.id 가 id 인 것을 제거함
+      setUsers(users.filter((user) => user.id !== id));
+    },
+    [users]
+  );
+  const onToggle = useCallback(
+    (id) => {
+      setUsers(
+        users.map((user) =>
+          user.id === id ? { ...user, active: !user.active } : user
+        )
+      );
+    },
+    [users]
+  );
+  const count = useMemo(() => countActiveUsers(users), [users]);
+  return (
+    <>
+      <CreateUser
+        username={username}
+        email={email}
+        onChange={onChange}
+        onCreate={onCreate}
+      />
+      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
+      <div>활성사용자 수 : {count}</div>
+    </>
+  );
+}
+
+export default App;
+```
