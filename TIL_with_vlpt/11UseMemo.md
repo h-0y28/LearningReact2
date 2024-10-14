@@ -191,8 +191,8 @@ function App() {
 export default App;
 ```
 
-![alt text](image.png)
-![alt text](image-1.png)
+![alt text](11imgs/image.png)
+![alt text](11imgs/image-1.png)
 
 ---
 
