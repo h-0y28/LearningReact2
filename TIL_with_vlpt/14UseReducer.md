@@ -16,7 +16,7 @@ Redux와 비슷한 패턴을 제공
 
 ### 2. **`useReducer` 사용 방법**
 
-### 2.1 **Reducer 함수 정의**
+#### 2.1 **Reducer 함수 정의**
 
 ```jsx
 function reducer(state, action) {
@@ -31,7 +31,7 @@ function reducer(state, action) {
 }
 ```
 
-### 2.2 **`useReducer` 사용**
+#### 2.2 **`useReducer` 사용**
 
 ```jsx
 import React, { useReducer } from "react";
@@ -64,8 +64,6 @@ function Counter() {
 - 상태 업데이트 로직이 **명확**해짐
 - 상태 관리의 **확장성**이 높음
 - **복잡한 상태**도 관리 가능
-
----
 
 ### 5. **단점**
 
