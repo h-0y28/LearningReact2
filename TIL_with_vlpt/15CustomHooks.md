@@ -1,3 +1,34 @@
+## 커스텀 Hook `useInputs` 구현하기
+
+### 1. 디렉터리 및 파일 생성
+
+- `src` 디렉터리 내에 `hooks` 디렉터리를 생성
+- `hooks` 디렉터리 내에 `useInputs.js` 파일 생성
+
+### 2. `useInputs.js` 코드 작성
+
+```jsx
+import { useState, useCallback } from "react";
+
+function useInputs(initialForm) {
+  const [form, setForm] = useState(initialForm);
+  const onChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setForm((form) => ({ ...form, [name]: value }));
+  }, []);
+  const reset = useCallback(() => setForm(initialForm), [initialForm]);
+  return [form, onChange, reset];
+}
+
+export default useInputs;
+```
+
+### 3. `App.js` 수정
+
+- `useReducer`에서 기존 `inputs` 제거
+- `useInputs` 사용하여 입력값 관리
+
+```jsx
 import React, { useRef, useReducer, useMemo, useCallback } from "react";
 import UserList from "./UserList";
 import CreateUser from "./CreateUser";
@@ -79,3 +110,13 @@ function App() {
 }
 
 export default App;
+```
+
+### 4. 커스텀 Hook 사용의 장점
+
+- 로직을 재사용하여 코드의 중복을 줄임
+- 컴포넌트의 가독성 향상
+
+### 더 해볼 것
+
+- `useInputs` 커스텀 Hook을 `useReducer`를 사용하여 구현
